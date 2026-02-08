@@ -11,7 +11,7 @@ import Home from "./Pages/Home";
 
 function App() {
   return (
-    <div className="min-h-screen overflow-hidden">
+    <div className="min-h-screen overflow-y-hidden">
       <StarBackground />
 
       {/* FIXED NAVBAR */}

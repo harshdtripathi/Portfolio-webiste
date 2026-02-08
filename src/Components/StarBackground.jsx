@@ -26,7 +26,7 @@ const StarBackground = () => {
     };
 
     const initStars = () => {
-      const starCount = width < 768 ? 250 : 700;
+      const starCount = width < 768 ? 450 : 1200; // ⭐ MORE STARS
 
       stars = Array.from({ length: starCount }, () => {
         const x = Math.random() * width - width / 2;
@@ -35,10 +35,13 @@ const StarBackground = () => {
         return {
           x,
           y,
-          z: Math.random() * 0.8 + 0.2,
-          size: Math.random() * 1.4 + 0.4,
+          z: Math.random() * 0.9 + 0.1,       // depth
+          size: Math.random() * 1.8 + 0.4,
           alpha: Math.random() * 0.6 + 0.4,
-          glow: Math.random() * 10 + 6,
+          baseAlpha: Math.random() * 0.6 + 0.4,
+          glow: Math.random() * 14 + 6,
+          twinkle: Math.random() * 0.015 + 0.004,
+          twinkleDir: Math.random() > 0.5 ? 1 : -1,
         };
       });
     };
@@ -47,8 +50,8 @@ const StarBackground = () => {
       shootingStars.push({
         x: Math.random() * width,
         y: Math.random() * height * 0.4,
-        len: Math.random() * 250 + 150,
-        speed: Math.random() * 20 + 15,
+        len: Math.random() * 280 + 160,
+        speed: Math.random() * 22 + 14,
         angle: Math.PI / 4,
         alpha: 1,
       });
@@ -60,12 +63,19 @@ const StarBackground = () => {
       const cx = width / 2;
       const cy = height / 2;
 
-      rotation += width < 768 ? 0.0004 : 0.0006;
+      rotation += width < 768 ? 0.00045 : 0.0007;
 
       const cosR = Math.cos(rotation);
       const sinR = Math.sin(rotation);
 
+      // ⭐ STARS
       stars.forEach((s) => {
+        // Twinkle effect
+        s.alpha += s.twinkle * s.twinkleDir;
+        if (s.alpha > s.baseAlpha + 0.3 || s.alpha < s.baseAlpha - 0.3) {
+          s.twinkleDir *= -1;
+        }
+
         const rx = s.x * cosR - s.y * sinR;
         const ry = s.x * sinR + s.y * cosR;
 
@@ -73,13 +83,14 @@ const StarBackground = () => {
         const py = cy + ry * s.z;
 
         ctx.beginPath();
-        ctx.shadowBlur = s.glow;
-        ctx.shadowColor = "rgba(255,255,255,0.9)";
+        ctx.shadowBlur = s.glow * s.z;
+        ctx.shadowColor = "rgba(255,255,255,0.95)";
         ctx.arc(px, py, s.size * s.z, 0, Math.PI * 2);
         ctx.fillStyle = `rgba(255,255,255,${s.alpha})`;
         ctx.fill();
       });
 
+      // 🌠 SHOOTING STARS
       shootingStars.forEach((s, i) => {
         ctx.beginPath();
         ctx.moveTo(s.x, s.y);
@@ -89,7 +100,7 @@ const StarBackground = () => {
         );
         ctx.strokeStyle = `rgba(255,255,255,${s.alpha})`;
         ctx.lineWidth = 2;
-        ctx.shadowBlur = 25;
+        ctx.shadowBlur = 30;
         ctx.shadowColor = "white";
         ctx.stroke();
 
@@ -100,16 +111,16 @@ const StarBackground = () => {
         if (s.alpha <= 0) shootingStars.splice(i, 1);
       });
 
-      if (Math.random() < 0.004) createShootingStar();
+      if (Math.random() < 0.006) createShootingStar();
 
       animationId = requestAnimationFrame(animate);
     };
 
-    // ✅ IMPORTANT ORDER
+    // ✅ Proper init order
     resize();
     initStars();
 
-    // ✅ Fade-in to hide any first-frame artifacts
+    // ✅ Fade-in to avoid first-frame clustering
     canvas.style.opacity = "0";
     requestAnimationFrame(() => {
       canvas.style.transition = "opacity 1.2s ease";

@@ -11,7 +11,7 @@ const Team = () => {
   return (
     <div className="flex flex-col w-full mx-auto">
       <section className="text-white px-6 md:px-16 py-16 md:py-20">
-        
+
         {/* Heading */}
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-start gap-6 md:gap-20 mb-14 md:mb-20">
           <h2 className="text-3xl md:text-4xl font-semibold tracking-wide whitespace-nowrap text-center md:text-left w-full md:w-auto">
@@ -38,6 +38,9 @@ const Team = () => {
                 "Our lead developer turns static designs into high-performance digital reality. Specializing in responsive web development, they ensure that every site is fast, secure, and works flawlessly across all devices.",
               footer: "Clean Code (Web dev focus)",
               image: harsh,
+              whatsapp: "https://wa.me/919696181843",
+              linkedin: "https://www.linkedin.com/in/harsh-tripathi99",
+              instagram: "https://www.instagram.com/",
             },
             {
               title: "The Visionary",
@@ -47,6 +50,9 @@ const Team = () => {
                 "With a background rooted in architecture, I approach web design as the construction of digital spaces. My focus is on creating simple and elegant interfaces in Figma.",
               footer: "User-Centric Design (Figma focus)",
               image: ansh,
+              whatsapp: "https://wa.me/919696181843",
+              linkedin: "https://www.linkedin.com/in/harsh-tripathi99",
+              instagram: "https://www.instagram.com/",
             },
             {
               title: "The Strategist",
@@ -56,28 +62,25 @@ const Team = () => {
                 "The heartbeat of our operations. Our manager ensures that every project stays on track, on time, and on brand while keeping business goals the top priority.",
               footer: "Collaborative Spirit (Client focus)",
               image: sahil,
+              whatsapp: "https://wa.me/919696181843",
+              linkedin: "https://www.linkedin.com/in/harsh-tripathi99",
+              instagram: "https://www.instagram.com/",
             },
           ].map((member, i) => (
             <div
               key={i}
               className="
-                relative
-                border border-[#2a2a2a]
-                rounded-xl
-                px-6 md:px-8
-                py-8 md:py-10
+                relative border border-[#2a2a2a] rounded-xl
+                px-6 md:px-8 py-8 md:py-10
                 min-h-[480px] md:min-h-[540px]
                 flex flex-col justify-between
-                hover:border-cyan-400
-                transition-all duration-300
+                hover:border-cyan-400 transition-all duration-300
                 overflow-hidden group
               "
               onMouseMove={(e) => {
                 const rect = e.currentTarget.getBoundingClientRect();
-                const x = e.clientX - rect.left;
-                const y = e.clientY - rect.top;
-                e.currentTarget.style.setProperty("--x", `${x}px`);
-                e.currentTarget.style.setProperty("--y", `${y}px`);
+                e.currentTarget.style.setProperty("--x", `${e.clientX - rect.left}px`);
+                e.currentTarget.style.setProperty("--y", `${e.clientY - rect.top}px`);
               }}
             >
               {/* CARD GLOW */}
@@ -100,25 +103,37 @@ const Team = () => {
                   />
                 </div>
 
-                {/* ARC ICONS */}
+                {/* SOCIAL ICONS */}
                 <div className="absolute right-6 md:right-10 top-6">
-                  <div className="absolute -left-4 top-0 w-8 h-8 rounded-full border border-[#3a3a3a]
-                    flex items-center justify-center text-white
-                    hover:border-cyan-400 hover:text-cyan-400 cursor-pointer">
-                    <FaLinkedin className="text-lg md:text-xl" />
-                  </div>
+                  <a
+                    href={member.linkedin}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="absolute -left-4 top-0 w-8 h-8 rounded-full border border-[#3a3a3a]
+                    flex items-center justify-center text-white hover:border-cyan-400 hover:text-cyan-400"
+                  >
+                    <FaLinkedin />
+                  </a>
 
-                  <div className="absolute left-1 top-10 w-8 h-8 rounded-full border border-[#3a3a3a]
-                    flex items-center justify-center text-white
-                    hover:border-cyan-400 hover:text-cyan-400 cursor-pointer">
-                    <FaInstagram className="text-lg md:text-xl" />
-                  </div>
+                  <a
+                    href={member.instagram}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="absolute left-1 top-10 w-8 h-8 rounded-full border border-[#3a3a3a]
+                    flex items-center justify-center text-white hover:border-cyan-400 hover:text-cyan-400"
+                  >
+                    <FaInstagram />
+                  </a>
 
-                  <div className="absolute -left-3 top-20 w-8 h-8 rounded-full border border-[#3a3a3a]
-                    flex items-center justify-center text-white
-                    hover:border-cyan-400 hover:text-cyan-400 cursor-pointer">
-                    <FaWhatsapp className="text-lg md:text-xl" />
-                  </div>
+                  <a
+                    href={member.whatsapp}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="absolute -left-3 top-20 w-8 h-8 rounded-full border border-[#3a3a3a]
+                    flex items-center justify-center text-white hover:border-cyan-400 hover:text-cyan-400"
+                  >
+                    <FaWhatsapp />
+                  </a>
                 </div>
 
                 {/* Text */}
@@ -126,9 +141,7 @@ const Team = () => {
                   {member.title}
                 </h3>
 
-                <p className="text-center font-semibold text-sm md:text-base">
-                  {member.name}
-                </p>
+                <p className="text-center font-semibold">{member.name}</p>
 
                 <p className="text-center text-xs text-gray-400 mb-4">
                   ({member.role})
@@ -140,7 +153,7 @@ const Team = () => {
               </div>
 
               {/* Footer */}
-              <p className="relative z-10 text-center text-xs text-gray-500 mt-8 md:mt-10">
+              <p className="relative z-10 text-center text-xs text-gray-500 mt-8">
                 {member.footer}
               </p>
             </div>

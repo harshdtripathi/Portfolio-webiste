@@ -7,6 +7,7 @@ const OurWorks = ({ desc, image, name, link, flag }) => {
       <section
         className="
         lg:mt-28
+        mt-20
           relative
           w-full
           max-w-[1400px]

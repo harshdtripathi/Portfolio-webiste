@@ -6,10 +6,11 @@ const OurWorks = ({ desc, image, name, link, flag }) => {
     <div className="w-full flex justify-center">
       <section
         className="
+        lg:mt-28
           relative
           w-full
           max-w-[1400px]
-          min-h-screen
+          min-h-[70vh] md:min-h-screen   /* smaller height on mobile */
           md:h-screen
           flex
           flex-col
@@ -17,15 +18,16 @@ const OurWorks = ({ desc, image, name, link, flag }) => {
           items-center
           px-4
           md:px-20
+          mb-10 md:mb-0                 /* reduce gap between divs on mobile */
         "
       >
 
         {/* ------------------------------------------------------ */}
         {/* 📱 MOBILE VIEW (clean layout) */}
         {/* ------------------------------------------------------ */}
-        <div className="md:hidden w-full flex flex-col items-center mt-16">
+        <div className="md:hidden w-full flex flex-col items-center mt-12">
           {/* Title */}
-          <h1 className="text-3xl font-semibold text-white text-center mb-4">
+          <h1 className="text-3xl font-semibold text-white text-center mb-3">
             {name}
           </h1>
 
@@ -33,11 +35,11 @@ const OurWorks = ({ desc, image, name, link, flag }) => {
           <img
             src={image}
             alt={name}
-            className="w-[300px] sm:w-[350px] rounded-3xl shadow-2xl mb-4"
+            className="w-[300px] sm:w-[340px] rounded-3xl shadow-2xl mb-3"
           />
 
           {/* Description */}
-          <p className="text-white text-sm text-center leading-relaxed bg-black/40 px-4 py-3 rounded-md mb-4">
+          <p className="text-white text-sm text-center leading-relaxed bg-black/40 px-4 py-3 rounded-md mb-3">
             {desc}
           </p>
 
@@ -67,7 +69,7 @@ const OurWorks = ({ desc, image, name, link, flag }) => {
             w-[260px] sm:w-[300px] md:w-[380px]
             h-[360px] sm:h-[420px] md:h-[480px]
             lg:border-4 border-gray-500
-            mt-16 md:mt-20
+            mt-24 md:mt-32
             p-6 md:p-9
             z-10
           "

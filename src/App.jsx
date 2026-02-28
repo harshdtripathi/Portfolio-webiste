@@ -18,7 +18,7 @@ function App() {
       <Navbar />
 
       {/* Push content below fixed navbar */}
-      <div className="pt-28">
+      <div >
         <Routes>
            <Route path="/" element={<Home />} />
           <Route path="/team" element={<Team />} />

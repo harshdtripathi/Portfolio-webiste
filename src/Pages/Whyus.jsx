@@ -16,7 +16,7 @@ const Whyus = () => {
         </div>
 
         {/* VERTICAL WHY */}
-        <div className="relative mt-10 lg:absolute lg:-bottom-44 left-1/12 lg:-translate-x-1/2 flex items-center gap-3">
+        <div className="relative mt-10 lg:absolute lg:-bottom-44   left-1/6 lg:-translate-x-0.5 flex items-center gap-3">
           {/* LEFT LINE */}
           <div className="w-[2px] h-44 sm:h-36 lg:h-44 bg-sky-400" />
 

@@ -20,7 +20,7 @@ const Home = () => {
                     }}
                     onMouseEnter={() => setHovered(true)}
                     onMouseLeave={() => setHovered(false)}
-                    className="relative border-4 flex flex-col p-3.5 mx-auto items-center border-blue-400 overflow-hidden"
+                    className="relative flex flex-col p-3.5 mx-auto items-center border-blue-400 overflow-hidden"
                 >
                     {/* GLOW */}
                     {hovered && (
@@ -39,11 +39,11 @@ const Home = () => {
                     <img
                         src={logo}
                         alt="ASH Logo"
-                        className="relative z-10 w-[280px] md:w-3xl object-contain"
+                        className="relative z-30 w-[320px] md:w-3xl object-contain"
                     />
 
                     {/* TEXT */}
-                    <h1 className="relative z-10 mt-6 text-3xl md:text-5xl font-semibold tracking-wide text-white/80">
+                    <h1 className="relative z-10  text-3xl md:text-5xl font-semibold tracking-wide text-white/80">
                         A.S.H Developers
                     </h1>
                 </div>

@@ -24,18 +24,33 @@ const StarBackground = () => {
     }
 
     function init() {
-      const N = W < 768 ? 700 : 1400;
+      const N = W < 768 ? 200 : 400; // Drastically reduced for 60fps
       const colorGroups = [
         [220, 20, 98], [200, 40, 90], [240, 30, 85],
         [60, 50, 95], [180, 30, 90], [300, 20, 90],
       ];
 
       stars = Array.from({ length: N }, () => {
-        const angle = Math.random() * Math.PI * 2;
-        const dist = Math.sqrt(Math.random()) * Math.max(W, H) * 0.65;
+        // Galaxy spiral parameters
+        const arms = 4; // Number of spiral arms
+        const armIndex = Math.floor(Math.random() * arms);
+        const armOffset = (Math.PI * 2 * armIndex) / arms;
+        
+        // Core density (denser at center)
+        const dist = Math.pow(Math.random(), 2.5) * Math.max(W, H) * 0.75;
+        
+        // Swirl factor to curl the arms
+        const swirl = dist * 0.0035;
+        
+        // Spread the stars out (tighter in center, looser at edges)
+        const scatterRange = dist * 0.6 + 50;
+        const scatterAngle = (Math.random() - 0.5) * scatterRange * 0.01;
+        
+        const angle = armOffset + swirl + scatterAngle;
+        
         const cg = colorGroups[Math.floor(Math.random() * colorGroups.length)];
-        const z = 0.15 + Math.random() * 0.85;
-        const isBright = Math.random() < 0.04;
+        const z = 0.1 + Math.random() * 0.9;
+        const isBright = Math.random() < 0.05;
         return {
           ox: Math.cos(angle) * dist,
           oy: Math.sin(angle) * dist,
@@ -116,7 +131,7 @@ const StarBackground = () => {
       frame++;
       ctx.clearRect(0, 0, W, H);
       const cx = W / 2, cy = H / 2;
-      rotation += 0.00055;
+      rotation += 0.0015;
       const cosR = Math.cos(rotation), sinR = Math.sin(rotation);
 
       const rp = (ox, oy) => [
@@ -171,15 +186,20 @@ const StarBackground = () => {
         if (px < -10 || px > W + 10 || py < -10 || py > H + 10) return;
 
         const sz = s.size * s.z;
-        ctx.shadowBlur = s.isBright
-          ? s.glow * (1 + twinkle * 0.3)
-          : s.glow * 0.5;
-        ctx.shadowColor = `hsla(${s.h},${s.s}%,${s.l}%,${s.isBright ? 0.9 : 0.5})`;
         ctx.beginPath();
         ctx.arc(px, py, sz, 0, Math.PI * 2);
-        ctx.fillStyle = `hsla(${s.h},${s.s}%,${s.l}%,${a})`;
+        
+        // Simple fast fill without heavy blur filters
+        ctx.fillStyle = `hsla(${s.h},${s.s}%,${s.l}%,${a * (s.isBright ? 1 : 0.8)})`;
         ctx.fill();
-        ctx.shadowBlur = 0;
+
+        // Very basic fake glow using standard arc instead of shadowBlur
+        if (s.isBright && a > 0.3) {
+            ctx.beginPath();
+            ctx.arc(px, py, sz * 2.5, 0, Math.PI * 2);
+            ctx.fillStyle = `hsla(${s.h},${s.s}%,${s.l}%,${a * 0.15})`;
+            ctx.fill();
+        }
 
         if (s.spikes && a > 0.5) drawSpikes(px, py, sz, a * 0.7);
       });

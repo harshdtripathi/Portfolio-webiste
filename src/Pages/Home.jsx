@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { motion } from "framer-motion";
 import logo from "../assets/images/ash logo only.png";
 
 const Home = () => {
@@ -6,8 +7,13 @@ const Home = () => {
     const [hovered, setHovered] = useState(false);
 
     return (
-        <section className="w-full h-screen flex justify-center items-center overflow-y-hidden">
-            <div className="flex flex-col items-center mx-auto text-white select-none">
+        <section className="w-full min-h-screen flex justify-center items-center overflow-hidden">
+            <motion.div 
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 1, ease: "easeOut" }}
+                className="flex flex-col items-center mx-auto text-white select-none"
+            >
 
                 {/* LOGO */}
                 <div
@@ -48,7 +54,7 @@ const Home = () => {
                     </h1>
                 </div>
 
-            </div>
+            </motion.div>
         </section>
     );
 };

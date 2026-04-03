@@ -1,13 +1,26 @@
 import React from "react";
 import whyusImg from "../assets/images/whyus.png"; // use the same illustration
+import { motion } from "framer-motion";
 
 const Whyus = () => {
   return (
-    <section className="relative w-full min-h-screen flex flex-col lg:flex-row items-center px-6 sm:px-10 lg:px-24 text-white">
+    <motion.section 
+       initial={{ opacity: 0 }}
+       whileInView={{ opacity: 1 }}
+       viewport={{ once: true, margin: "-100px" }}
+       transition={{ duration: 0.8 }}
+       className="relative w-full min-h-screen flex flex-col lg:flex-row items-center px-6 sm:px-10 lg:px-24 text-white overflow-hidden"
+    >
       
       {/* LEFT IMAGE CARD */}
-      <div className="relative flex flex-col items-center">
-        <div className="w-[220px] h-[220px] sm:w-[260px] sm:h-[260px] lg:w-[280px] lg:h-[280px] bg-white rounded-[32px] flex items-center justify-center">
+      <motion.div 
+         initial={{ x: -100, opacity: 0 }}
+         whileInView={{ x: 0, opacity: 1 }}
+         viewport={{ once: true }}
+         transition={{ duration: 0.8, ease: "easeOut" }}
+         className="relative flex flex-col items-center"
+      >
+        <div className="w-[220px] h-[220px] sm:w-[260px] sm:h-[260px] lg:w-[280px] lg:h-[280px] bg-white rounded-[32px] flex items-center justify-center relative z-10 shadow-[0_0_40px_rgba(56,189,248,0.2)]">
           <img
             src={whyusImg}
             alt="Why Us"
@@ -28,10 +41,16 @@ const Whyus = () => {
           {/* RIGHT LINE */}
           <div className="w-[2px] h-44 sm:h-36 lg:h-44 bg-sky-400" />
         </div>
-      </div>
+      </motion.div>
 
       {/* RIGHT CONTENT */}
-      <div className="mt-12 lg:mt-0 lg:ml-[200px] max-w-[520px] text-sm sm:text-base leading-relaxed space-y-6 sm:space-y-8 text-white/90 text-center lg:text-left">
+      <motion.div 
+         initial={{ x: 100, opacity: 0 }}
+         whileInView={{ x: 0, opacity: 1 }}
+         viewport={{ once: true }}
+         transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
+         className="mt-12 lg:mt-0 lg:ml-[200px] max-w-[520px] text-sm sm:text-base leading-relaxed space-y-6 sm:space-y-8 text-white/90 text-center lg:text-left relative z-20"
+      >
         <p>
           <span className="font-semibold">Clean & Scalable Code:</span> We
           prioritize clean code principles, making your website easy to update
@@ -49,8 +68,8 @@ const Whyus = () => {
           act as your extended team, providing transparent communication and
           regular updates throughout the project.
         </p>
-      </div>
-    </section>
+      </motion.div>
+    </motion.section>
   );
 };
 

@@ -6,6 +6,7 @@ import ansh from "../assets/images/ansh.png";
 import harsh from "../assets/images/harsh.png";
 import sahil from "../assets/images/sahil.png";
 import Aboutus from "./Aboutus";
+import { motion } from "framer-motion";
 
 const Team = () => {
   return (
@@ -67,13 +68,18 @@ const Team = () => {
               instagram: "https://www.instagram.com/",
             },
           ].map((member, i) => (
-            <div
+            <motion.div
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ duration: 0.6, ease: "easeOut", delay: i * 0.2 }}
               key={i}
               className="
                 relative border border-[#2a2a2a] rounded-xl
                 px-6 md:px-8 py-8 md:py-10
                 min-h-[480px] md:min-h-[540px]
                 flex flex-col justify-between
+                bg-white/5 backdrop-blur-md
                 hover:border-cyan-400 transition-all duration-300
                 overflow-hidden group
               "
@@ -156,7 +162,7 @@ const Team = () => {
               <p className="relative z-10 text-center text-xs text-gray-500 mt-8">
                 {member.footer}
               </p>
-            </div>
+            </motion.div>
           ))}
         </div>
       </section>

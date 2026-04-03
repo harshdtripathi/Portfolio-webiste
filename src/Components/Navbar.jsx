@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import { HiMenu, HiX } from "react-icons/hi";
+import { motion, AnimatePresence } from "framer-motion";
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
@@ -66,44 +67,52 @@ const Navbar = () => {
       </div>
 
       {/* MOBILE DROPDOWN */}
-      {open && (
-        <div className="md:hidden mt-4 mx-6 rounded-xl bg-black/70 backdrop-blur-lg border border-white/10">
-          <div className="flex flex-col items-center py-6 gap-6 text-white tracking-widest text-sm">
-            {navItems.map((item, index) => (
-              <NavLink
-                key={index}
-                to={item.url}
-                onClick={() => setOpen(false)}
-                className="group flex flex-col items-center"
-              >
-                {({ isActive }) => (
-                  <>
-                    <span
-                      className={`transition ${
-                        isActive ? "opacity-100" : "opacity-80 group-hover:opacity-100"
-                      }`}
-                    >
-                      {item.name}
-                    </span>
+      <AnimatePresence>
+        {open && (
+          <motion.div 
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.3 }}
+            className="md:hidden mt-4 mx-6 rounded-xl bg-black/70 backdrop-blur-lg border border-white/10 overflow-hidden"
+          >
+            <div className="flex flex-col items-center py-6 gap-6 text-white tracking-widest text-sm">
+              {navItems.map((item, index) => (
+                <NavLink
+                  key={index}
+                  to={item.url}
+                  onClick={() => setOpen(false)}
+                  className="group flex flex-col items-center"
+                >
+                  {({ isActive }) => (
+                    <>
+                      <span
+                        className={`transition ${
+                          isActive ? "opacity-100" : "opacity-80 group-hover:opacity-100"
+                        }`}
+                      >
+                        {item.name}
+                      </span>
 
-                    <span
-                      className={`
-                        mt-2
-                        h-[2px]
-                        w-8
-                        bg-white
-                        transition-all
-                        duration-300
-                        ${isActive ? "opacity-100" : "opacity-0"}
-                      `}
-                    />
-                  </>
-                )}
-              </NavLink>
-            ))}
-          </div>
-        </div>
-      )}
+                      <span
+                        className={`
+                          mt-2
+                          h-[2px]
+                          w-8
+                          bg-white
+                          transition-all
+                          duration-300
+                          ${isActive ? "opacity-100" : "opacity-0"}
+                        `}
+                      />
+                    </>
+                  )}
+                </NavLink>
+              ))}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </nav>
   );
 };

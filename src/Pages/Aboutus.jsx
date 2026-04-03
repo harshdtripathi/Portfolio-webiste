@@ -18,6 +18,7 @@ import {
   SiPython,
   SiPostman,
 } from "react-icons/si";
+import { motion } from "framer-motion";
 
 const GlowCard = ({ children, glow }) => {
   const moveGlow = (e) => {
@@ -49,18 +50,24 @@ const GlowCard = ({ children, glow }) => {
 
 const Aboutus = () => {
   return (
-    <section className="w-full px-4 sm:px-6 md:px-16 py-16 md:py-20 text-white">
+    <section className="w-full px-4 sm:px-6 md:px-16 py-16 md:py-20 text-white overflow-hidden">
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-5">
 
         {/* Tech Arsenal */}
+        <motion.div
+           initial={{ opacity: 0, y: 50 }}
+           whileInView={{ opacity: 1, y: 0 }}
+           viewport={{ once: true, margin: "-100px" }}
+           transition={{ duration: 0.8, ease: "easeOut", delay: 0 }}
+        >
         <GlowCard glow="rgba(34,211,238,0.35)">
-          <div className="border border-cyan-500 rounded-xl p-6 md:p-8 flex flex-col items-center text-center min-h-[460px] md:min-h-[520px]">
+          <div className="border border-cyan-500/50 bg-white/5 backdrop-blur-md rounded-xl p-6 md:p-8 flex flex-col items-center text-center min-h-[460px] md:min-h-[520px]">
 
             <h2 className="text-xl md:text-2xl font-semibold text-cyan-400 mb-6">
               Tech Arsenal
             </h2>
 
-            <div className="flex flex-col flex-grow justify-center gap-6 md:gap-8">
+            <div className="flex flex-col grow justify-center gap-6 md:gap-8">
               <div className="grid grid-cols-4 gap-4 md:gap-6 text-4xl md:text-5xl text-cyan-300 place-items-center">
                 <FaHtml5 />
                 <FaCss3Alt />
@@ -87,10 +94,17 @@ const Aboutus = () => {
             </div>
           </div>
         </GlowCard>
+        </motion.div>
 
         {/* Static Web */}
+        <motion.div
+           initial={{ opacity: 0, y: 50 }}
+           whileInView={{ opacity: 1, y: 0 }}
+           viewport={{ once: true, margin: "-100px" }}
+           transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
+        >
         <GlowCard glow="rgba(251,146,60,0.35)">
-          <div className="border border-orange-400 rounded-xl p-6 md:p-8 flex flex-col text-center min-h-[460px] md:min-h-[520px]">
+          <div className="border border-orange-400/50 bg-white/5 backdrop-blur-md rounded-xl p-6 md:p-8 flex flex-col text-center min-h-[460px] md:min-h-[520px]">
 
             <h2 className="text-xl md:text-2xl font-semibold text-orange-400 mb-6">
               Static Web
@@ -115,16 +129,23 @@ const Aboutus = () => {
             </div>
           </div>
         </GlowCard>
+        </motion.div>
 
         {/* Dynamic Web */}
+        <motion.div
+           initial={{ opacity: 0, y: 50 }}
+           whileInView={{ opacity: 1, y: 0 }}
+           viewport={{ once: true, margin: "-100px" }}
+           transition={{ duration: 0.8, ease: "easeOut", delay: 0.4 }}
+        >
         <GlowCard glow="rgba(96,165,250,0.35)">
-          <div className="border border-blue-400 rounded-xl p-6 md:p-8 flex flex-col text-center min-h-[460px] md:min-h-[520px]">
+          <div className="border border-blue-400/50 bg-white/5 backdrop-blur-md rounded-xl p-6 md:p-8 flex flex-col text-center min-h-[460px] md:min-h-[520px]">
 
             <h2 className="text-xl md:text-2xl font-semibold text-blue-400 mb-6">
               Dynamic Web
             </h2>
 
-            <div className="flex-grow flex items-center">
+            <div className="grow flex items-center">
               <p className="text-gray-300 leading-relaxed text-base md:text-lg">
                 A Dynamic Website is like a living office or a smart store.
                 <br /><br />
@@ -141,6 +162,7 @@ const Aboutus = () => {
             </div>
           </div>
         </GlowCard>
+        </motion.div>
 
       </div>
     </section>

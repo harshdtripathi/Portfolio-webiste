@@ -1,10 +1,15 @@
 import React from "react";
 import Whyus from "./Whyus";
+import { motion } from "framer-motion";
 
 const OurWorks = ({ desc, image, name, link, flag }) => {
   return (
-    <div className="w-full flex justify-center">
-      <section
+    <div className="w-full flex justify-center overflow-hidden">
+      <motion.section
+        initial={{ opacity: 0, y: 80 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-100px" }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
         className="
           lg:mt-28
           mt-20
@@ -31,7 +36,7 @@ const OurWorks = ({ desc, image, name, link, flag }) => {
           <img
             src={image}
             alt={name}
-            className="w-[300px] sm:w-[340px] rounded-3xl shadow-2xl mb-3"
+            className="w-[300px] sm:w-[340px] rounded-3xl shadow-[0_0_30px_rgba(147,51,234,0.3)] mb-3"
           />
 
           <p className="text-white text-sm text-center leading-relaxed bg-black/40 px-4 py-3 rounded-md mb-3">
@@ -54,7 +59,7 @@ const OurWorks = ({ desc, image, name, link, flag }) => {
           <div
             className="
               relative
-              flex-shrink-0
+              shrink-0
               w-[220px] lg:w-[280px]
               h-[360px] md:h-[440px] lg:h-[500px]
               border-4 border-gray-500
@@ -86,7 +91,7 @@ const OurWorks = ({ desc, image, name, link, flag }) => {
             <img
               src={image}
               alt={name}
-              className="w-full max-w-[700px] xl:max-w-[860px] rounded-3xl shadow-2xl"
+              className="w-full max-w-[700px] xl:max-w-[860px] rounded-3xl shadow-[0_0_50px_rgba(147,51,234,0.25)] border mt-10 md:mt-0 border-white/10"
             />
           </div>
         </div>
@@ -107,7 +112,7 @@ const OurWorks = ({ desc, image, name, link, flag }) => {
         >
           {name} ↗
         </a>
-      </section>
+      </motion.section>
     </div>
   );
 };
